@@ -2,7 +2,7 @@
 
 当前版本：`v2.1.0`
 
-`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill。同时有独立桌面APP版本，详情可看app-version版本，推荐使用APP（节省token）。
+`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill。
 
 它主要面向 MATLAB、Origin、Python/Matplotlib、Excel、仿真软件等导出的论文插图，能够批量去除图片四周多余的白色、透明、浅色纯色或平滑渐变边距，减少在 Word、PowerPoint 中手动裁剪图片的工作量。
 
@@ -322,12 +322,10 @@ SVG 是矢量图，不适合直接用位图裁剪方式保存。
 
 ## Version History
 
-### v2.1.0 新增了APP
+### v2.1.0 - Skill 文档整理
 
-- 将图形界面 APP 合并进同一仓库。
-- APP 支持单张图片和文件夹批量裁剪。
-- APP 支持输出到原文件夹时自动添加 `裁剪_` 前缀。
-- APP 支持重复裁剪提醒、失败跳过和中文界面说明。
+- 整理 Skill 说明，补充安装路径示例和文件结构。
+- 保留位图与 SVG 的裁剪说明，方便直接部署到 Codex 环境。
 
 
 
