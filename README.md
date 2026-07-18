@@ -2,10 +2,7 @@
 
 当前版本：`v2.1.0`
 
-`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill，同时也包含可独立运行的 Windows 图形界面 APP。
-
-如果你想体验图形界面版本，请切换到 `app-version` 分支。  
-本 `main` 分支保留 Skill / 核心裁剪代码，便于继续维护和同步源码。
+`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill。同时有独立桌面APP版本，详情可看app-version版本，推荐使用APP（节省token）。
 
 它主要面向 MATLAB、Origin、Python/Matplotlib、Excel、仿真软件等导出的论文插图，能够批量去除图片四周多余的白色、透明、浅色纯色或平滑渐变边距，减少在 Word、PowerPoint 中手动裁剪图片的工作量。
 
@@ -46,7 +43,9 @@
 - SVG 输出仍为 SVG 矢量文件。
 - 如果裁剪过紧，可以通过 `--padding` 增大保留边距。
 
-## 仓库结构
+## 下载 Skill 所需文件
+
+如果你只想安装 `Skill`，保留下面这些文件和目录就够了：
 
 ```text
 .
@@ -98,18 +97,18 @@
 
 ### 方式一：作为 Codex Skill 安装
 
-将本仓库克隆或复制到 Codex skills 目录。
+将本仓库克隆或复制到 Codex skills 目录。示例路径可以放在任意盘符，不一定是 C 盘。
 
 Windows 示例：
 
 ```powershell
-git clone https://github.com/Soullocker/Crop_Picture.git "$env:USERPROFILE\.codex\skills\crop-picture"
+git clone https://github.com/Soullocker/Crop_Picture.git D:\Codex\skills\crop-picture
 ```
 
 安装 Python 依赖：
 
 ```powershell
-cd "$env:USERPROFILE\.codex\skills\crop-picture"
+cd D:\Codex\skills\crop-picture
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
@@ -152,15 +151,15 @@ tools\crop_single.bat
 示例请求：
 
 ```text
-裁剪 D:\论文\图片 文件夹下的所有图片和 SVG，输出到 D:\论文\图片_裁剪后。
+裁剪 D:\图片 文件夹下的所有图片和 SVG，输出到 D:\图片_裁剪后。
 ```
 
 ```text
-只裁剪 D:\论文\图片 文件夹里的 figure.svg，输出到 D:\论文\裁剪后。
+只裁剪 D:\图片 文件夹里的 figure.svg，输出到 D:\裁剪后。
 ```
 
 ```text
-帮我把这个文件夹里的 MATLAB 导出图去掉白边，原图不要覆盖。
+帮我把这个文件夹里的导出图去掉白边，原图不要覆盖。
 ```
 
 ### 双击批量裁剪
@@ -181,7 +180,7 @@ Output folder path:
 裁剪后图片保存文件夹
 
 Padding pixels, press Enter for 8:
-保留边距，直接回车使用默认值
+保留边距，直接回车使用默认值，也可以自己输入数值
 ```
 
 ### 双击裁剪单张图片
@@ -195,14 +194,14 @@ tools\crop_single.bat
 可以输入单张图片完整路径：
 
 ```text
-D:\论文\图片\figure.png
+D:\图片\figure.png
 ```
 
 也可以先输入图片所在文件夹，再输入文件名：
 
 ```text
-D:\论文\图片
-figure.svg
+D:\图片
+图片.svg or 图片.png（记得加格式即可）
 ```
 
 ## 命令行用法
@@ -321,92 +320,16 @@ SVG 是矢量图，不适合直接用位图裁剪方式保存。
 
 不推荐。本工具主要面向图表、示意图、白底导出图和 SVG 矢量图。
 
-## 打包与发布
-
-### 打包成独立程序
-
-在项目根目录运行：
-
-```powershell
-.\tools\build_app.bat
-```
-
-打包完成后，`dist/` 里会生成独立的 Windows 程序。
-
-### 上传到 GitHub
-
-1. 把源码改动提交到当前分支。
-2. 推送到 GitHub 仓库。
-3. 如果要发布给别人下载，去 GitHub 新建一个 Release。
-4. 把 `dist/` 里的程序压缩后上传到 Release 附件。
-
-这样可以保留之前版本。每次发布一个新版本时，新建一个 Release 就行，旧的 Release 仍然保留。
-
-## 图形界面 APP
-
-这是 `Crop Picture` 的桌面版，面向科研绘图场景，用来批量裁剪图片白边、透明边和浅色背景边距。
-
-### 主要功能
-
-- 选择单张图片或整个文件夹
-- 裁剪后可保存到其他文件夹
-- 也可以直接保存到原文件夹，并自动加上 `裁剪_` 前缀，避免覆盖原图
-- 支持批量处理，单张失败不会中断后续图片
-- 支持重复裁剪提醒，避免反复处理同一批文件
-
-### 支持格式
-
-`.png`、`.jpg`、`.jpeg`、`.bmp`、`.tif`、`.tiff`、`.webp`、`.gif`、`.ppm`、`.pgm`、`.pbm`、`.pnm`、`.svg`
-
-### 运行方式
-
-在项目根目录双击：
-
-```text
-tools\run_app.bat
-```
-
-也可以直接运行：
-
-```text
-.\.venv\Scripts\python.exe .\app\main.py
-```
-
-### 打包方式
-
-在项目根目录运行：
-
-```text
-tools\build_app.bat
-```
-
-打包完成后，独立程序会生成在 `dist/` 目录中。
-
-### 使用建议
-
-- 科研绘图、论文插图、白底图、透明底图、纯色背景图都比较适合
-- 如果是 `SVG`，请确保电脑上有 `Microsoft Edge` 或 `Google Chrome`
-- 如果裁剪太紧，可以适当增大保留边距
-
 ## Version History
 
-### v2.1.0 - Skill 与 APP 合并版本
+### v2.1.0 新增了APP
 
 - 将图形界面 APP 合并进同一仓库。
 - APP 支持单张图片和文件夹批量裁剪。
 - APP 支持输出到原文件夹时自动添加 `裁剪_` 前缀。
 - APP 支持重复裁剪提醒、失败跳过和中文界面说明。
-- README 统一整理为 Skill 与 APP 两部分说明。
 
-### v1.0.0 - Initial usable version
 
-- 支持 PNG/JPG/JPEG/BMP/TIF/TIFF 位图白边裁剪。
-- 支持 SVG 矢量图裁剪，并保留 SVG 格式。
-- 支持批量文件夹处理。
-- 支持单张图片处理。
-- 支持通过文件夹路径和文件名指定单个或多个文件。
-- 提供 Windows 双击工具。
-- 提供 Codex Skill 入口。
 
 ### v1.1.0 - Scientific figure workflow improvements
 
@@ -414,3 +337,15 @@ tools\build_app.bat
 - 增强浅色纯色和平滑渐变背景的裁剪判断。
 - 当输入和输出为同一文件夹时，输出文件自动添加 `裁剪_` 前缀。
 - 批量处理时单张失败不再中断后续文件，会输出警告和失败汇总。
+
+
+
+### v1.0.0 - Initial usable version
+
+- 支持 `PNG`、`JPG`、`JPEG`、`BMP`、`TIF`、`TIFF` 位图白边裁剪。
+- 支持 SVG 矢量图裁剪，并保留 SVG 格式。
+- 支持批量文件夹处理。
+- 支持单张图片处理。
+- 支持通过文件夹路径和文件名指定单个或多个文件。
+- 提供 Windows 双击工具。
+- 提供 Codex Skill 入口。

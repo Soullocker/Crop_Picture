@@ -2,7 +2,7 @@
     [string]$InputPath,
     [string]$ImageName,
     [string]$OutputDir,
-    [int]$Padding = 8
+    [int]$Padding = 5
 )
 
 $ErrorActionPreference = "Stop"
