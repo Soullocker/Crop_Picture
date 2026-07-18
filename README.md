@@ -6,6 +6,8 @@
 
 它主要面向 MATLAB、Origin、Python/Matplotlib、Excel、仿真软件等导出的论文插图，能够批量去除图片四周多余的白色、透明、浅色纯色或平滑渐变边距，减少在 Word、PowerPoint 中手动裁剪图片的工作量。
 
+如果你想看图形界面版本的说明，请打开 [app/README.md](app/README.md)。
+
 本 Skill 同时支持：
 
 - 位图图片：`.png`、`.jpg`、`.jpeg`、`.bmp`、`.tif`、`.tiff`、`.webp`、`.gif`、`.ppm`、`.pgm`、`.pbm`、`.pnm`
