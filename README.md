@@ -6,8 +6,6 @@
 
 它主要面向 MATLAB、Origin、Python/Matplotlib、Excel、仿真软件等导出的论文插图，能够批量去除图片四周多余的白色、透明、浅色纯色或平滑渐变边距，减少在 Word、PowerPoint 中手动裁剪图片的工作量。
 
-如果你想看图形界面版本的说明，请打开 [app/README.md](app/README.md)。
-
 本 Skill 同时支持：
 
 - 位图图片：`.png`、`.jpg`、`.jpeg`、`.bmp`、`.tif`、`.tiff`、`.webp`、`.gif`、`.ppm`、`.pgm`、`.pbm`、`.pnm`
@@ -340,6 +338,52 @@ SVG 是矢量图，不适合直接用位图裁剪方式保存。
 4. 把 `dist/` 里的程序压缩后上传到 Release 附件。
 
 这样可以保留之前版本。每次发布一个新版本时，新建一个 Release 就行，旧的 Release 仍然保留。
+
+## 图形界面 APP
+
+这是 `Crop Picture` 的桌面版，面向科研绘图场景，用来批量裁剪图片白边、透明边和浅色背景边距。
+
+### 主要功能
+
+- 选择单张图片或整个文件夹
+- 裁剪后可保存到其他文件夹
+- 也可以直接保存到原文件夹，并自动加上 `裁剪_` 前缀，避免覆盖原图
+- 支持批量处理，单张失败不会中断后续图片
+- 支持重复裁剪提醒，避免反复处理同一批文件
+
+### 支持格式
+
+`.png`、`.jpg`、`.jpeg`、`.bmp`、`.tif`、`.tiff`、`.webp`、`.gif`、`.ppm`、`.pgm`、`.pbm`、`.pnm`、`.svg`
+
+### 运行方式
+
+在项目根目录双击：
+
+```text
+tools\run_app.bat
+```
+
+也可以直接运行：
+
+```text
+.\.venv\Scripts\python.exe .\app\main.py
+```
+
+### 打包方式
+
+在项目根目录运行：
+
+```text
+tools\build_app.bat
+```
+
+打包完成后，独立程序会生成在 `dist/` 目录中。
+
+### 使用建议
+
+- 科研绘图、论文插图、白底图、透明底图、纯色背景图都比较适合
+- 如果是 `SVG`，请确保电脑上有 `Microsoft Edge` 或 `Google Chrome`
+- 如果裁剪太紧，可以适当增大保留边距
 
 ## Version History
 
