@@ -1,21 +1,49 @@
+# Python environment
 .venv/
+venv/
+.Python
+
+# Python bytecode and caches
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.ipynb_checkpoints/
+
+# Test and coverage outputs
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Build and packaging outputs
+build/
+dist/
+*.spec
+*.manifest
+*.egg-info/
 
 # Generated crop outputs
 *_cropped/
 *_crop/
 output/
 outputs/
-dist/
-build/
 
-# Local editor and OS files
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.bak
+tmp/
+temp/
+
+# Editor and OS files
 .idea/
 .vscode/
 Thumbs.db
 Desktop.ini
+.DS_Store

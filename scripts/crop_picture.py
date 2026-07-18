@@ -464,14 +464,14 @@ def collect_images(input_path: Path, names: list[str]) -> list[Path]:
 
 
 def build_destination(source: Path, input_path: Path, output_dir: Path) -> Path:
-    """生成输出路径；同目录输出时自动添加“裁剪”前缀避免覆盖原图。"""
+    """生成输出路径；同目录输出时自动添加“裁剪_”前缀避免覆盖原图。"""
     if input_path.is_dir():
         input_dir = input_path
     else:
         input_dir = input_path.parent
 
     if output_dir == input_dir:
-        return output_dir / f"裁剪{source.name}"
+        return output_dir / f"裁剪_{source.name}"
     return output_dir / source.name
 
 
