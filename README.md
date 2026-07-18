@@ -1,8 +1,8 @@
 # Crop Picture 图片白边裁剪 Skill
 
-当前版本：`v1.1.0`
+当前版本：`v2.1.0`
 
-`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill，同时也可以作为本地 Windows 小工具独立使用。
+`Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill，同时也包含可独立运行的 Windows 图形界面 APP。
 
 如果你想体验图形界面版本，请切换到 `app-version` 分支。  
 本 `main` 分支保留 Skill / 核心裁剪代码，便于继续维护和同步源码。
@@ -389,6 +389,14 @@ tools\build_app.bat
 - 如果裁剪太紧，可以适当增大保留边距
 
 ## Version History
+
+### v2.1.0 - Skill 与 APP 合并版本
+
+- 将图形界面 APP 合并进同一仓库。
+- APP 支持单张图片和文件夹批量裁剪。
+- APP 支持输出到原文件夹时自动添加 `裁剪_` 前缀。
+- APP 支持重复裁剪提醒、失败跳过和中文界面说明。
+- README 统一整理为 Skill 与 APP 两部分说明。
 
 ### v1.0.0 - Initial usable version
 
