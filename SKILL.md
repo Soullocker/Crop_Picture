@@ -31,16 +31,20 @@ On Windows after creating `.venv`:
 
 ## Supported Requests
 
-- Crop every supported file in a folder.
+- Crop every supported file in the current folder, without recursing into subfolders.
 - Crop a single raster image or SVG file.
 - Crop one or more named files inside a folder.
 - Save results to a user-specified output folder.
+- If the output folder is the same as the input folder, save cropped files with the `裁剪` prefix.
+- Skip files that fail to crop and print a warning, then continue with the remaining files.
 
-Supported formats: `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tif`, `.tiff`, `.svg`.
+Supported formats: `.png`, `.jpg`, `.jpeg`, `.bmp`, `.tif`, `.tiff`, `.webp`, `.gif`, `.ppm`, `.pgm`, `.pbm`, `.pnm`, `.svg`.
 
 The script preserves original files. It writes cropped copies to the output folder.
 
 For raster files, the output is a cropped raster image. For SVG files, the output remains SVG and the script tightens the root `viewBox`.
+
+The raster cropper is tuned for scientific figures with plain white, transparent, light solid-color, or smooth gradient backgrounds. It is not intended for general photo subject detection.
 
 ## Usage
 
