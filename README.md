@@ -4,6 +4,9 @@
 
 `Crop Picture` 是一个用于自动裁剪图片白边的 Codex Skill，同时也可以作为本地 Windows 小工具独立使用。
 
+如果你想体验图形界面版本，请切换到 `app-version` 分支。  
+本 `main` 分支保留 Skill / 核心裁剪代码，便于继续维护和同步源码。
+
 它主要面向 MATLAB、Origin、Python/Matplotlib、Excel、仿真软件等导出的论文插图，能够批量去除图片四周多余的白色、透明、浅色纯色或平滑渐变边距，减少在 Word、PowerPoint 中手动裁剪图片的工作量。
 
 本 Skill 同时支持：
