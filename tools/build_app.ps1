@@ -54,9 +54,31 @@ if (Test-Path -LiteralPath $icoIconPath) {
 $args += $mainScript
 
 Push-Location $projectRoot
+$originalBuildPath = $env:PATH
 try {
+    # 隔离其他软件的 DLL 搜索目录，避免把 Poppler 等软件的同名 ICU 库误打进 APP。
+    $env:PATH = @(
+        (Join-Path $projectRoot ".venv\Scripts"),
+        (Join-Path $env:SystemRoot "System32"),
+        $env:SystemRoot
+    ) -join ";"
     & $venvPython @args
+    if ($LASTEXITCODE -ne 0) {
+        throw "APP 打包失败，退出码：$LASTEXITCODE"
+    }
+    # 构建成功后实际启动 EXE 自检，避免只检查打包成功而遗漏 DLL 加载失败。
+    $exePath = Join-Path $distDir "$AppName.exe"
+    $smokeTestProcess = Start-Process -FilePath $exePath -ArgumentList "--self-test" -PassThru -WindowStyle Hidden
+    if (-not $smokeTestProcess.WaitForExit(30000)) {
+        $smokeTestProcess.Kill($true)
+        throw "APP 启动检查超时，请检查打包后的 Qt 和 DLL 依赖。"
+    }
+    if ($smokeTestProcess.ExitCode -ne 0) {
+        throw "APP 启动检查失败，退出码：$($smokeTestProcess.ExitCode)"
+    }
+    Write-Host "APP 打包及启动检查通过：$exePath"
 }
 finally {
+    $env:PATH = $originalBuildPath
     Pop-Location
 }
