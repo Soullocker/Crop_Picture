@@ -1,3 +1,4 @@
+﻿# 此脚本使用带 BOM 的 UTF-8 编码，确保 Windows PowerShell 5.1 正确读取中文。
 param(
     [string]$AppName = "Crop_Picture"
 )
@@ -70,7 +71,8 @@ try {
     $exePath = Join-Path $distDir "$AppName.exe"
     $smokeTestProcess = Start-Process -FilePath $exePath -ArgumentList "--self-test" -PassThru -WindowStyle Hidden
     if (-not $smokeTestProcess.WaitForExit(30000)) {
-        $smokeTestProcess.Kill($true)
+        # Windows PowerShell 5.1 不支持 Kill(true)，使用系统工具结束本次自检进程树。
+        & (Join-Path $env:SystemRoot "System32\taskkill.exe") /PID $smokeTestProcess.Id /T /F | Out-Null
         throw "APP 启动检查超时，请检查打包后的 Qt 和 DLL 依赖。"
     }
     if ($smokeTestProcess.ExitCode -ne 0) {
