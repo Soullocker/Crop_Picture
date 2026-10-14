@@ -435,7 +435,7 @@ def process_file(
 
 
 def collect_images(input_path: Path, names: list[str]) -> list[Path]:
-    """收集待处理图片；只处理当前文件夹，不递归进入子文件夹。"""
+    """收集待处理图片；批量扫描跳过裁剪结果，单独指定的图片仍可处理。"""
     if input_path.is_file():
         if input_path.suffix.lower() not in IMAGE_EXTENSIONS:
             raise SystemExit(f"Unsupported image type: {input_path}")
@@ -456,10 +456,13 @@ def collect_images(input_path: Path, names: list[str]) -> list[Path]:
             raise SystemExit("These named files are not supported images: " + ", ".join(unsupported))
         return files
 
+    # 批量处理只收集原图，避免已有结果再次生成“裁剪_裁剪_”文件。
     return [
         path
         for path in sorted(input_path.iterdir())
-        if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS
+        if path.is_file()
+        and path.suffix.lower() in IMAGE_EXTENSIONS
+        and not path.name.startswith("裁剪_")
     ]
 
 
